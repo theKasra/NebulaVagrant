@@ -78,6 +78,8 @@ public class Player : MonoBehaviour
     }
 
     // Adding to score
+    // You gain score by shooting meteors and enemy spaceships, each have their own score value.
+    // Fix this part later.
     public void Score()
     {
         score++;

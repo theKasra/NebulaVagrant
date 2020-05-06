@@ -28,14 +28,13 @@ public class MeteorSpawner : MonoBehaviour
 
     // Spawns the meteors                      ^ y
     //                                         |
-    // Visual outlook for the cases:    ---5---|---1---
+    // Visual outlook for the cases:    ---1---|---2---
     //                                  |      |      |
-    //                                  4      |      3
+    //                                  8      |      3
     //                                  |=============| => x
+    //                                  7      |      4
     //                                  |      |      |
-    //                                  8      |      6
-    //                                  |      |      |
-    //                                  ---7---|---2---
+    //                                  ---6---|---5---
     // I mean... it works -_-
     private IEnumerator Spawn()
     {
@@ -48,36 +47,44 @@ public class MeteorSpawner : MonoBehaviour
 
             switch(sidePicker)
             {
-                case 1: Instantiate(meteors[randomMeteorIndex], 
-                    new Vector2(randomXPos, yPosBound), Quaternion.identity); break;
+                case 1: Meteor meteor1 = Instantiate(meteors[randomMeteorIndex], 
+                    new Vector2(-randomXPos, yPosBound), Quaternion.identity);
+                    meteor1.tag = "1"; break;
 
                 case 2:
-                    Instantiate(meteors[randomMeteorIndex],
-                new Vector2(randomXPos, -yPosBound), Quaternion.identity); break;
+                    Meteor meteor2 = Instantiate(meteors[randomMeteorIndex],
+                new Vector2(randomXPos, yPosBound), Quaternion.identity);
+                    meteor2.tag = "2"; break;
 
                 case 3:
-                    Instantiate(meteors[randomMeteorIndex],
-                new Vector2(xPosBound, randomYPos), Quaternion.identity); break;
+                    Meteor meteor3 = Instantiate(meteors[randomMeteorIndex],
+                new Vector2(xPosBound, randomYPos), Quaternion.identity);
+                    meteor3.tag = "3"; break;
 
                 case 4:
-                    Instantiate(meteors[randomMeteorIndex],
-                new Vector2(-xPosBound, randomYPos), Quaternion.identity); break;
+                    Meteor meteor4 = Instantiate(meteors[randomMeteorIndex],
+                new Vector2(xPosBound, -randomYPos), Quaternion.identity);
+                    meteor4.tag = "4"; break;
 
                 case 5:
-                    Instantiate(meteors[randomMeteorIndex],
-                new Vector2(-randomXPos, yPosBound), Quaternion.identity); break;
+                    Meteor meteor5 = Instantiate(meteors[randomMeteorIndex],
+                new Vector2(randomXPos, -yPosBound), Quaternion.identity);
+                    meteor5.tag = "5"; break;
 
                 case 6:
-                    Instantiate(meteors[randomMeteorIndex],
-                new Vector2(xPosBound, -randomYPos), Quaternion.identity); break;
+                    Meteor meteor6 = Instantiate(meteors[randomMeteorIndex],
+                new Vector2(-randomXPos, -yPosBound), Quaternion.identity);
+                    meteor6.tag = "6"; break;
 
                 case 7:
-                    Instantiate(meteors[randomMeteorIndex],
-                new Vector2(-randomXPos, -yPosBound), Quaternion.identity); break;
+                    Meteor meteor7 = Instantiate(meteors[randomMeteorIndex],
+                new Vector2(-xPosBound, -yPosBound), Quaternion.identity);
+                    meteor7.tag = "7"; break;
 
                 case 8:
-                    Instantiate(meteors[randomMeteorIndex],
-                new Vector2(-xPosBound, -randomYPos), Quaternion.identity); break;
+                    Meteor meteor8 = Instantiate(meteors[randomMeteorIndex],
+                new Vector2(-xPosBound, randomYPos), Quaternion.identity);
+                    meteor8.tag = "8"; break;
             }
 
             yield return new WaitForSeconds(spawnDelay);
