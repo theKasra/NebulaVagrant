@@ -135,3 +135,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xForceBound: 7
   yForceBound: 7
+  bigValue: 30
+  mediumValue: 15
+  smallValue: 5

@@ -7,16 +7,30 @@ public class Meteor : MonoBehaviour
 
     [SerializeField] float xForceBound;
     [SerializeField] float yForceBound;
+    [SerializeField] int bigValue;
+    [SerializeField] int mediumValue;
+    [SerializeField] int smallValue;
+
+    int value;
 
     float randomXForce, randomYForce;
 
+    float bigMass = 5f;
+    float mediumMass = 3.5f;
+    float smallMass = 1.75f;
+
+    bool isBig, isMedium, isSmall;
 
     Rigidbody2D rb2d;
+    Player player;
 
     // Start is called before the first frame update
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        player = FindObjectOfType<Player>();
+
+        Evaluate();
         PushIntoView();
     }
 
@@ -61,10 +75,67 @@ public class Meteor : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Laser")
+        if (collision.gameObject.tag == "Laser")
         {
-            Destroy(collision.gameObject);
+            if (isBig)
+            {
+                player.Score(bigValue);
+                Destroy(collision.gameObject);
+                Destroy(gameObject);
+            }
+
+            else if (isMedium)
+            {
+                player.Score(mediumValue);
+                Destroy(collision.gameObject);
+                Destroy(gameObject);
+            }
+
+            else
+            {
+                player.Score(smallValue);
+                Destroy(collision.gameObject);
+                Destroy(gameObject);
+            }
         }
     }
+
+    // Meteor self-destruction
+    public void SelfDestruct()
+    {
+        Destroy(gameObject);
+    }
+
+    // Sets values depending on what kind of meteor it is (Mass factor)
+    private void Evaluate()
+    {
+        if(rb2d.mass == bigMass)
+        {
+            isBig = true;
+            isMedium = false;
+            isSmall = false;
+
+            value = bigValue;
+        }
+
+        else if(rb2d.mass == mediumMass)
+        {
+            isMedium = true;
+            isBig = false;
+            isSmall = false;
+
+            value = mediumValue;
+        }
+
+        else if(rb2d.mass == smallMass)
+        {
+            isSmall = true;
+            isBig = false;
+            isMedium = false;
+
+            value = smallValue;
+        }
+    }
+
 
 }

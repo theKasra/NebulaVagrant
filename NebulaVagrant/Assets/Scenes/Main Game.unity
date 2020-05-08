@@ -393,6 +393,8 @@ MonoBehaviour:
   xPosBound: 10
   yPosBound: 6
   spawnDelay: 2
+  meteorCountLimit: 10
+  garbageCollectorDelay: 2
 --- !u!1 &973789561
 GameObject:
   m_ObjectHideFlags: 0
