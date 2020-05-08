@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    private const string TOP_SCORE = "topScore";
 
     [SerializeField] float movementSpeed;
     [SerializeField] float rotationSpeed;
@@ -12,7 +13,6 @@ public class Player : MonoBehaviour
     [SerializeField] float maxXTeleportBound;
     [SerializeField] float minYTeleportBound;
     [SerializeField] float maxYTeleportBound;
-    [SerializeField] int score = 0;
     [SerializeField] float fuelConsume;
     [SerializeField] float refuelAmount;
     [SerializeField] float waitForRefuel;
@@ -20,15 +20,22 @@ public class Player : MonoBehaviour
     [SerializeField] Slider fuelBar;
     [SerializeField] Laser laser;
     [SerializeField] Text scoreText;
+    [SerializeField] Text finalScoreText;
+    [SerializeField] Text topScoreText;
+    [SerializeField] Canvas mainCanvas;
+    [SerializeField] Canvas gameOverCanvas;
 
     float rotation;
+    int score;
 
     Rigidbody2D rb2d;
 
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1;
         rb2d = GetComponent<Rigidbody2D>();
+        gameOverCanvas.enabled = false;
         scoreText.text = score.ToString();
     }
 
@@ -39,6 +46,7 @@ public class Player : MonoBehaviour
         RotateWithMouse();
         Teleport();
         Fire();
+        CheckForGameOver();
     }
 
     // This method moves the player based on fuel mechanism
@@ -124,6 +132,40 @@ public class Player : MonoBehaviour
     private void Refuel()
     {
         fuelBar.value += refuelAmount;
+    }
+
+    // still going on or what?
+    private void CheckForGameOver()
+    {
+        if(healthBar.value <= 0)
+        {
+            GameOver();
+        }
+
+        else
+        {
+            return;
+        }
+    }
+
+    // lose
+    private void GameOver()
+    {
+        SaveTopScore();
+        mainCanvas.enabled = false;
+        finalScoreText.text = score.ToString();
+        topScoreText.text = PlayerPrefs.GetInt(TOP_SCORE).ToString();
+        gameOverCanvas.enabled = true;
+        Time.timeScale = 0;
+    }
+
+    private void SaveTopScore()
+    {
+        if(PlayerPrefs.GetInt(TOP_SCORE) < score)
+        {
+            PlayerPrefs.SetInt(TOP_SCORE, score);
+            PlayerPrefs.Save();
+        }
     }
 
 }

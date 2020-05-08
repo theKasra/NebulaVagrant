@@ -8,10 +8,7 @@ public class MeteorSpawner : MonoBehaviour
     [SerializeField] Meteor[] meteors;
     [SerializeField] float xPosBound, yPosBound;
     [SerializeField] float spawnDelay;
-    [SerializeField] int meteorCountLimit;
-    [SerializeField] float garbageCollectorDelay;
 
-    Meteor[] inSceneMeteors;
     int randomMeteorIndex, sidePicker;
     float randomXPos, randomYPos;
 
@@ -91,25 +88,6 @@ public class MeteorSpawner : MonoBehaviour
             }
 
             yield return new WaitForSeconds(spawnDelay);
-        }
-    }
-
-    // This coroutine destroys excess meteors  -STILL IN PROCESS-
-    private IEnumerator MeteorGarbageCollector()
-    {
-        while(true)
-        {
-            inSceneMeteors = FindObjectsOfType<Meteor>();
-            if (inSceneMeteors.Length >= meteorCountLimit)
-            {
-                for (int i = inSceneMeteors.Length - meteorCountLimit; i <= 0; i--)
-                {
-                    inSceneMeteors[i].SelfDestruct();
-                }
-                Debug.Log("gc done");
-            }
-
-            yield return new WaitForSeconds(garbageCollectorDelay);
         }
     }
 

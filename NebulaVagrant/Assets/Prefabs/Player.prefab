@@ -103,7 +103,6 @@ MonoBehaviour:
   minYTeleportBound: -5.5
   maxYTeleportBound: 5.5
   score: 0
-  health: 100
   fuelConsume: 0.12
   refuelAmount: 0.05
   waitForRefuel: 3
@@ -111,6 +110,8 @@ MonoBehaviour:
   fuelBar: {fileID: 0}
   laser: {fileID: 5740765110634611169, guid: 31875ebedf91b534d89596c4ae3ce472, type: 3}
   scoreText: {fileID: 0}
+  mainCanvas: {fileID: 0}
+  gameOverCanvas: {fileID: 0}
 --- !u!50 &4260349028580607228
 Rigidbody2D:
   serializedVersion: 4
