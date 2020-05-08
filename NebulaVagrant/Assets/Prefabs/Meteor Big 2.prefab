@@ -138,3 +138,6 @@ MonoBehaviour:
   bigValue: 30
   mediumValue: 15
   smallValue: 5
+  bigDamage: 20
+  mediumDamage: 15
+  smallDamage: 5

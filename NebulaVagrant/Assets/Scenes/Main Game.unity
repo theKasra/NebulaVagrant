@@ -1627,11 +1627,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4260349028580607227, guid: f3daaa9ddd16af74b935e65565169f0e,
         type: 3}
-      propertyPath: scoreText
-      value: 
-      objectReference: {fileID: 1296615524}
-    - target: {fileID: 4260349028580607227, guid: f3daaa9ddd16af74b935e65565169f0e,
-        type: 3}
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 2128669972}
@@ -1642,13 +1637,8 @@ PrefabInstance:
       objectReference: {fileID: 1657013846}
     - target: {fileID: 4260349028580607227, guid: f3daaa9ddd16af74b935e65565169f0e,
         type: 3}
-      propertyPath: fuelConsume
-      value: 0.12
-      objectReference: {fileID: 0}
-    - target: {fileID: 4260349028580607227, guid: f3daaa9ddd16af74b935e65565169f0e,
-        type: 3}
-      propertyPath: refuel
-      value: 0.05
-      objectReference: {fileID: 0}
+      propertyPath: scoreText
+      value: 
+      objectReference: {fileID: 1296615524}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3daaa9ddd16af74b935e65565169f0e, type: 3}

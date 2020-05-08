@@ -13,7 +13,6 @@ public class Player : MonoBehaviour
     [SerializeField] float minYTeleportBound;
     [SerializeField] float maxYTeleportBound;
     [SerializeField] int score = 0;
-    [SerializeField] int health = 100;
     [SerializeField] float fuelConsume;
     [SerializeField] float refuelAmount;
     [SerializeField] float waitForRefuel;
@@ -109,18 +108,19 @@ public class Player : MonoBehaviour
         scoreText.text = score.ToString();
     }
 
+    // Applying damage to player's health
     public void Damage(int damage)
     {
-        health -= damage;
-        Debug.Log("ouch");
-        // Use a slider to indicate health bar and update it with every damage
+        healthBar.value -= damage;
     }
 
+    // Consuming fuel
     private void FuelConsume()
     {
         fuelBar.value -= fuelConsume;
     }
 
+    // Refuel... yeah just refuel.
     private void Refuel()
     {
         fuelBar.value += refuelAmount;
