@@ -101,7 +101,8 @@ MonoBehaviour:
   maxXTeleportBound: 9
   minYTeleportBound: -5
   maxYTeleportBound: 5
-  destroyTime: 0.8
+  destructionCountdown: 0.8
+  damage: 5
 --- !u!50 &6978736885422953253
 Rigidbody2D:
   serializedVersion: 4

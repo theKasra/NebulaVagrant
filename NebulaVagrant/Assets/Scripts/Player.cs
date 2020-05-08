@@ -12,7 +12,8 @@ public class Player : MonoBehaviour
     [SerializeField] float maxXTeleportBound;
     [SerializeField] float minYTeleportBound;
     [SerializeField] float maxYTeleportBound;
-    [SerializeField] float score = 0;
+    [SerializeField] int score = 0;
+    [SerializeField] int health;
     [SerializeField] Laser laser;
     [SerializeField] Text scoreText;
 
@@ -78,12 +79,17 @@ public class Player : MonoBehaviour
     }
 
     // Adding to score
-    // You gain score by shooting meteors and enemy spaceships, each have their own score value.
-    // Fix this part later.
     public void Score(int value)
     {
         score += value;
         scoreText.text = score.ToString();
+    }
+
+    public void Damage(int damage)
+    {
+        health -= damage;
+        Debug.Log("ouch");
+        // Use a slider to indicate health bar and update it with every damage
     }
 
 }

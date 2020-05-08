@@ -7,11 +7,16 @@ public class Meteor : MonoBehaviour
 
     [SerializeField] float xForceBound;
     [SerializeField] float yForceBound;
+
     [SerializeField] int bigValue;
     [SerializeField] int mediumValue;
     [SerializeField] int smallValue;
 
-    int value;
+    [SerializeField] int bigDamage;
+    [SerializeField] int mediumDamage;
+    [SerializeField] int smallDamage;
+
+    int value, damage;
 
     float randomXForce, randomYForce;
 
@@ -75,6 +80,7 @@ public class Meteor : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        // if a laser collides with meteor
         if (collision.gameObject.tag == "Laser")
         {
             if (isBig)
@@ -98,6 +104,25 @@ public class Meteor : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+
+        // if the player collides with meteor
+        else if (collision.gameObject.tag == "Player")
+        {
+            if (isBig)
+            {
+                player.Damage(bigDamage);
+            }
+
+            else if (isMedium)
+            {
+                player.Damage(mediumDamage);
+            }
+
+            else
+            {
+                player.Damage(smallDamage);
+            }
+        }
     }
 
     // Meteor self-destruction
@@ -116,6 +141,7 @@ public class Meteor : MonoBehaviour
             isSmall = false;
 
             value = bigValue;
+            damage = bigDamage;
         }
 
         else if(rb2d.mass == mediumMass)
@@ -125,6 +151,7 @@ public class Meteor : MonoBehaviour
             isSmall = false;
 
             value = mediumValue;
+            damage = mediumDamage;
         }
 
         else if(rb2d.mass == smallMass)
@@ -134,6 +161,7 @@ public class Meteor : MonoBehaviour
             isMedium = false;
 
             value = smallValue;
+            damage = smallDamage;
         }
     }
 

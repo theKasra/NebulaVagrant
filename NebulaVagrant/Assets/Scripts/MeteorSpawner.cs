@@ -19,7 +19,6 @@ public class MeteorSpawner : MonoBehaviour
     void Start()
     {
         StartCoroutine(Spawn());
-        // StartCoroutine(MeteorGarbageCollector());
     }
 
     // Update is called once per frame
@@ -95,7 +94,7 @@ public class MeteorSpawner : MonoBehaviour
         }
     }
 
-    // This coroutine destroys excess meteors -                     -NOT DONE YET-
+    // This coroutine destroys excess meteors  -STILL IN PROCESS-
     private IEnumerator MeteorGarbageCollector()
     {
         while(true)

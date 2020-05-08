@@ -13,6 +13,9 @@ TagManager:
   - 6
   - 7
   - 8
+  - BigMeteor
+  - MediumMeteor
+  - SmallMeteor
   layers:
   - Default
   - TransparentFX

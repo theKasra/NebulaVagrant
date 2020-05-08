@@ -10,16 +10,20 @@ public class Laser : MonoBehaviour
     [SerializeField] float maxXTeleportBound;
     [SerializeField] float minYTeleportBound;
     [SerializeField] float maxYTeleportBound;
-    [SerializeField] float destroyTime;
+    [SerializeField] float destructionCountdown;
+    [SerializeField] int damage;
 
     Rigidbody2D rb2d;
+    Player player;
 
 
     // Start is called before the first frame update
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        player = FindObjectOfType<Player>();
         StartCoroutine(Terminate());
+        StartCoroutine(CollisionAdjustment());
     }
 
     // Update is called once per frame
@@ -49,12 +53,30 @@ public class Laser : MonoBehaviour
         }
     }
 
-    // Countdown to destruction
+    // Countdown to destruction... symphony of extinction lol =))
     private IEnumerator Terminate()
     {
-        yield return new WaitForSeconds(destroyTime);
-        Destroy(gameObject.gameObject);
+        yield return new WaitForSeconds(destructionCountdown);
+        Destroy(gameObject);
     }
 
+    // This coroutine adjusts the behaviour between player's collider and laser's collider.
+    // at the moment of shooting, there should be no collision between laser and player.
+    // afterwards the player is vulnerable toward lasers.
+    private IEnumerator CollisionAdjustment()
+    {
+        Physics2D.IgnoreLayerCollision(8, 9, true);
+        yield return new WaitForSeconds(0.1f);
+        Physics2D.IgnoreLayerCollision(8, 9, false);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Player")
+        {
+            player.Damage(damage);
+            Destroy(gameObject);
+        }
+    }
 
 }
