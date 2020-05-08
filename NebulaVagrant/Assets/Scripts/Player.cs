@@ -13,36 +13,60 @@ public class Player : MonoBehaviour
     [SerializeField] float minYTeleportBound;
     [SerializeField] float maxYTeleportBound;
     [SerializeField] int score = 0;
-    [SerializeField] int health;
+    [SerializeField] int health = 100;
+    [SerializeField] float fuelConsume;
+    [SerializeField] float refuelAmount;
+    [SerializeField] float waitForRefuel;
+    [SerializeField] Slider healthBar;
+    [SerializeField] Slider fuelBar;
     [SerializeField] Laser laser;
     [SerializeField] Text scoreText;
 
     float rotation;
 
+    Rigidbody2D rb2d;
+
     // Start is called before the first frame update
     void Start()
     {
+        rb2d = GetComponent<Rigidbody2D>();
         scoreText.text = score.ToString();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Move();
+        StartCoroutine(Move());
         RotateWithMouse();
         Teleport();
         Fire();
     }
 
-    // This method moves the player
-    // idea: charge bar for moving
-    private void Move()
+    // This method moves the player based on fuel mechanism
+    private IEnumerator Move()
     {
-        if (Input.GetAxis("Vertical")!=0 || Input.GetAxis("Horizontal")!=0)
+        if(fuelBar.value > 0)
         {
-            transform.Translate(new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"))
-                * Time.deltaTime * movementSpeed);
+            if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
+            {
+                transform.Translate(new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"))
+                    * Time.deltaTime * movementSpeed);
+                FuelConsume();
+            }
+
+            else
+            {
+                Refuel();
+            }
         }
+
+        else if(fuelBar.value == 0)
+        {
+            rb2d.velocity = new Vector2(0f, 0f);
+            yield return new WaitForSeconds(waitForRefuel);
+            Refuel();
+        }
+        
     }
 
     // With the value of Mouse movement on X axis, this method rotates the player.
@@ -90,6 +114,16 @@ public class Player : MonoBehaviour
         health -= damage;
         Debug.Log("ouch");
         // Use a slider to indicate health bar and update it with every damage
+    }
+
+    private void FuelConsume()
+    {
+        fuelBar.value -= fuelConsume;
+    }
+
+    private void Refuel()
+    {
+        fuelBar.value += refuelAmount;
     }
 
 }
