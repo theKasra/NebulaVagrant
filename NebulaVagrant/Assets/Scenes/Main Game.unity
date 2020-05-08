@@ -385,8 +385,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meteors:
   - {fileID: 6825277154537009043, guid: fef2fb85c564dfb43a7a43585dd9587b, type: 3}
+  - {fileID: 6825277154537009043, guid: 65cd0a7a9167f1a4f991b935cd97fa65, type: 3}
   - {fileID: 3616767991992004211, guid: 4b7a6a997c8adbd48bb05fabf2399d79, type: 3}
+  - {fileID: 3616767991992004211, guid: 1d7f9d79d60cd4c4a817fab7a46dc01d, type: 3}
   - {fileID: 2067845886853670863, guid: b7caa884d46b4384e8730bdfd22e40b4, type: 3}
+  - {fileID: 2067845886853670863, guid: 7c889a5a35306fc44a1d8ef2af2e4942, type: 3}
   xPosBound: 10
   yPosBound: 6
   spawnDelay: 2
@@ -900,6 +903,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4260349028580607224, guid: f3daaa9ddd16af74b935e65565169f0e,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4260349028580607224, guid: f3daaa9ddd16af74b935e65565169f0e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4260349028580607225, guid: f3daaa9ddd16af74b935e65565169f0e,
         type: 3}

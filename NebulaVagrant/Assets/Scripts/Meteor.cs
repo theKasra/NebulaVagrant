@@ -26,6 +26,7 @@ public class Meteor : MonoBehaviour
         
     }
 
+    // After spawning, meteors should find their way in camera view.
     private void PushIntoView()
     {
         randomXForce = Random.Range(0, xForceBound);
@@ -38,25 +39,16 @@ public class Meteor : MonoBehaviour
                     ForceMode2D.Impulse); break;
 
             case "2": 
-                //rb2d.AddForce(new Vector2(-randomXForce, -randomYForce),
-                    //ForceMode2D.Impulse); break;
-
             case "3":
                 rb2d.AddForce(new Vector2(-randomXForce, -randomYForce),
                     ForceMode2D.Impulse); break;
 
             case "4":
-                //rb2d.AddForce(new Vector2(-randomXForce, randomYForce),
-                    //ForceMode2D.Impulse); break;
-
             case "5":
                 rb2d.AddForce(new Vector2(-randomXForce, randomYForce),
                     ForceMode2D.Impulse); break;
 
             case "6":
-                //rb2d.AddForce(new Vector2(randomXForce, randomYForce),
-                    //ForceMode2D.Impulse); break;
-
             case "7":
                 rb2d.AddForce(new Vector2(randomXForce, randomYForce),
                     ForceMode2D.Impulse); break;
@@ -64,6 +56,14 @@ public class Meteor : MonoBehaviour
             case "8":
                 rb2d.AddForce(new Vector2(randomXForce, -randomYForce),
                     ForceMode2D.Impulse); break;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Laser")
+        {
+            Destroy(collision.gameObject);
         }
     }
 
