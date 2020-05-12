@@ -29,12 +29,14 @@ public class Player : MonoBehaviour
     int score;
 
     Rigidbody2D rb2d;
+    AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
         Time.timeScale = 1;
         rb2d = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
         gameOverCanvas.enabled = false;
         scoreText.text = score.ToString();
     }
@@ -52,7 +54,7 @@ public class Player : MonoBehaviour
     // This method moves the player based on fuel mechanism
     private IEnumerator Move()
     {
-        if(fuelBar.value > 0)
+        if (fuelBar.value > 0)
         {
             if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
             {
@@ -67,22 +69,22 @@ public class Player : MonoBehaviour
             }
         }
 
-        else if(fuelBar.value == 0)
+        else if (fuelBar.value == 0)
         {
             rb2d.velocity = new Vector2(0f, 0f);
             yield return new WaitForSeconds(waitForRefuel);
             Refuel();
         }
-        
+
     }
 
     // With the value of Mouse movement on X axis, this method rotates the player.
     private void RotateWithMouse()
     {
-        if(Input.GetAxis("Mouse X")!=0)
+        if (Input.GetAxis("Mouse X") != 0)
         {
             rotation = Input.GetAxis("Mouse X") * Time.deltaTime * rotationSpeed;
-            transform.Rotate(new Vector3(0, 0, 1)* -rotation);
+            transform.Rotate(new Vector3(0, 0, 1) * -rotation);
         }
     }
 
@@ -92,18 +94,19 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Instantiate(laser, transform.position, transform.rotation);
+            audioSource.Play();
         }
     }
 
     // Teleports the player if it's moving out of camera view
     private void Teleport()
     {
-        if(transform.position.x <= minXTeleportBound || transform.position.x >= maxXTeleportBound)
+        if (transform.position.x <= minXTeleportBound || transform.position.x >= maxXTeleportBound)
         {
             transform.position = new Vector2(-transform.position.x, transform.position.y);
         }
 
-        else if(transform.position.y <= minYTeleportBound || transform.position.y >= maxYTeleportBound)
+        else if (transform.position.y <= minYTeleportBound || transform.position.y >= maxYTeleportBound)
         {
             transform.position = new Vector2(transform.position.x, -transform.position.y);
         }
@@ -137,7 +140,7 @@ public class Player : MonoBehaviour
     // still going on or what?
     private void CheckForGameOver()
     {
-        if(healthBar.value <= 0)
+        if (healthBar.value <= 0)
         {
             GameOver();
         }
@@ -159,13 +162,23 @@ public class Player : MonoBehaviour
         Time.timeScale = 0;
     }
 
+    // save top score
     private void SaveTopScore()
     {
-        if(PlayerPrefs.GetInt(TOP_SCORE) < score)
+        if (PlayerPrefs.GetInt(TOP_SCORE) < score)
         {
             PlayerPrefs.SetInt(TOP_SCORE, score);
             PlayerPrefs.Save();
         }
     }
 
+    public float GetAxisHorizontal()
+    {
+        return Input.GetAxis("Horizontal");
+    }
+
+    public float GetAxisVertical()
+    {
+        return Input.GetAxis("Vertical");
+    }
 }

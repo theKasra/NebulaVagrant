@@ -48,8 +48,8 @@ public class Meteor : MonoBehaviour
     // After spawning, meteors should find their way in camera view.
     private void PushIntoView()
     {
-        randomXForce = Random.Range(0, xForceBound);
-        randomYForce = Random.Range(0, yForceBound);
+        randomXForce = Random.Range(1, xForceBound);
+        randomYForce = Random.Range(1, yForceBound);
 
         switch(gameObject.tag)
         {

@@ -133,8 +133,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fd6235b57e2c11459770a7bac69a474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xForceBound: 7
-  yForceBound: 7
+  xForceBound: 10
+  yForceBound: 10
   bigValue: 30
   mediumValue: 15
   smallValue: 5
